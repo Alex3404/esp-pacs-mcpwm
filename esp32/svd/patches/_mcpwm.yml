@@ -1,9 +1,4 @@
 MCPWM0:
-  CAP_TIMER_PHASE:
-    _modify:
-      CAP_TIMER_PHASE:
-        name: CAP_PHASE
-
   INT_RAW:
     _array:
       TIMER?_STOP:
