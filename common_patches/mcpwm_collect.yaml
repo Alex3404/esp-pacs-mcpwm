@@ -4,19 +4,39 @@ _cluster:
       name: CFG0
       description: PWM TIMERx period and update method configuration register.
       _strip: TIMER?_
+    
     TIMER?_CFG1:
       name: CFG1
       description: PWM TIMERx working mode and start/stop control configuration register.
       _strip: TIMER?_
+
+      START:
+        IfRunningStopAtTEZ: [0, "If started then run until timer equal zero"]
+        IfRunningStopAtTEP: [1, "If started then run until timer equal period"]
+        StartAndRun: [2, "Start and run"]
+        StartThenStopAtTEZ: [3, "Start and run until timer equal zero"]
+        StartThenStopAtTEP: [4, "Start and run until timer equal period"]
+
+      MOD:
+        Freeze: [0, "Freeze"]
+        Up: [1, "Count up"]
+        Down: [2, "Count down"]
+        UpDown: [3, "Count up and down"]
+
     TIMER?_SYNC:
       name: SYNC
       description: PWM TIMERx sync function configuration register.
       _strip: TIMER?_
+
+      SYNCO_SEL:
+        SyncIn: [0, "Sync input signal"]
+        TEZ: [1, "Timer equal zero"]
+        TEP: [2, "Timer equal period"]
+
     TIMER?_STATUS:
       name: STATUS
       description: PWM TIMERx status register.
       _strip: TIMER?_
-
   CH%s:
     _array:
       GEN_?:
@@ -82,13 +102,5 @@ _cluster:
         - FH?_
         - TZ?_
       description: Status of fault events.
-
-_array:
-  CAP_CH?_CFG:
-    description: Capture channel %s configuration and enable
-    _strip: CAP?_
-  CAP_CH?:
-    description: Value of last capture on channel %s
-    _strip: CAP?_
 
 _include: int_strip.yaml
