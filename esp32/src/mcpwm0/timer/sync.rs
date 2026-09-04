@@ -10,10 +10,80 @@ pub type SYNCI_EN_W<'a, REG> = crate::BitWriter<'a, REG>;
 pub type SW_R = crate::BitReader;
 #[doc = "Field `SW` writer - "]
 pub type SW_W<'a, REG> = crate::BitWriter<'a, REG>;
+#[doc = "\n\nValue on reset: 0"]
+#[cfg_attr(feature = "defmt", derive(defmt::Format))]
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+#[repr(u8)]
+pub enum SYNCO_SEL {
+    #[doc = "0: Sync input signal"]
+    SyncIn = 0,
+    #[doc = "1: Timer equal zero"]
+    Tez    = 1,
+    #[doc = "2: Timer equal period"]
+    Tep    = 2,
+}
+impl From<SYNCO_SEL> for u8 {
+    #[inline(always)]
+    fn from(variant: SYNCO_SEL) -> Self {
+        variant as _
+    }
+}
+impl crate::FieldSpec for SYNCO_SEL {
+    type Ux = u8;
+}
+impl crate::IsEnum for SYNCO_SEL {}
 #[doc = "Field `SYNCO_SEL` reader - "]
-pub type SYNCO_SEL_R = crate::FieldReader;
+pub type SYNCO_SEL_R = crate::FieldReader<SYNCO_SEL>;
+impl SYNCO_SEL_R {
+    #[doc = "Get enumerated values variant"]
+    #[inline(always)]
+    pub const fn variant(&self) -> Option<SYNCO_SEL> {
+        match self.bits {
+            0 => Some(SYNCO_SEL::SyncIn),
+            1 => Some(SYNCO_SEL::Tez),
+            2 => Some(SYNCO_SEL::Tep),
+            _ => None,
+        }
+    }
+    #[doc = "Sync input signal"]
+    #[inline(always)]
+    pub fn is_sync_in(&self) -> bool {
+        *self == SYNCO_SEL::SyncIn
+    }
+    #[doc = "Timer equal zero"]
+    #[inline(always)]
+    pub fn is_tez(&self) -> bool {
+        *self == SYNCO_SEL::Tez
+    }
+    #[doc = "Timer equal period"]
+    #[inline(always)]
+    pub fn is_tep(&self) -> bool {
+        *self == SYNCO_SEL::Tep
+    }
+}
 #[doc = "Field `SYNCO_SEL` writer - "]
-pub type SYNCO_SEL_W<'a, REG> = crate::FieldWriter<'a, REG, 2>;
+pub type SYNCO_SEL_W<'a, REG> = crate::FieldWriter<'a, REG, 2, SYNCO_SEL>;
+impl<'a, REG> SYNCO_SEL_W<'a, REG>
+where
+    REG: crate::Writable + crate::RegisterSpec,
+    REG::Ux: From<u8>,
+{
+    #[doc = "Sync input signal"]
+    #[inline(always)]
+    pub fn sync_in(self) -> &'a mut crate::W<REG> {
+        self.variant(SYNCO_SEL::SyncIn)
+    }
+    #[doc = "Timer equal zero"]
+    #[inline(always)]
+    pub fn tez(self) -> &'a mut crate::W<REG> {
+        self.variant(SYNCO_SEL::Tez)
+    }
+    #[doc = "Timer equal period"]
+    #[inline(always)]
+    pub fn tep(self) -> &'a mut crate::W<REG> {
+        self.variant(SYNCO_SEL::Tep)
+    }
+}
 #[doc = "Field `PHASE` reader - "]
 pub type PHASE_R = crate::FieldReader<u16>;
 #[doc = "Field `PHASE` writer - "]
